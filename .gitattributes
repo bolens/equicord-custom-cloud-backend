@@ -1,0 +1,7 @@
+* text=auto eol=lf
+/.github export-ignore
+/.githooks export-ignore
+/.editorconfig export-ignore
+
+# Unified diff context lines retain their required space prefix.
+patches/*.patch -whitespace

@@ -1,0 +1,6 @@
+{
+  "javascript": ["scripts/*.mjs", "tests/*.mjs"],
+  "markdown": ["*.md", ".github/*.md"],
+  "exclude": ["fixtures/**"],
+  "notes": "TypeScript plugin and touched upstream application source use native Equicord lint and typecheck in the integration gate. Upstream fixtures retain exact bytes and provenance."
+}

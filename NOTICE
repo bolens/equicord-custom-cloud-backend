@@ -1,0 +1,16 @@
+Custom Cloud Backend is an independent Equicord user plugin maintained by bolens.
+
+The plugin and integration changes derive from Equicord and Vencord and are
+licensed GPL-3.0-or-later. Existing source copyright and SPDX notices are retained.
+
+Upstream: https://github.com/Equicord/Equicord
+Revision: 8d63e9694b2ef5195806b3f8b2e03135a4b4ea2c
+
+fixtures/upstream contains exact reference source from that revision:
+- src/components/settings/tabs/sync/CloudTab.tsx
+- src/api/SettingsSync/cloudSetup.tsx
+- src/main/csp/index.ts
+- src/utils/constants.ts
+
+Vencord and Equicord source copyright belongs to Vendicated and contributors.
+See LICENSE and the per-file source headers. The GNU GPL text is preserved intact.

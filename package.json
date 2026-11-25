@@ -1,0 +1,31 @@
+{
+  "name": "equicord-custom-cloud-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A custom cloud backend selector for Equicord settings sync.",
+  "license": "GPL-3.0-or-later",
+  "author": "bolens",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bolens/equicord-custom-cloud-backend.git"
+  },
+  "engines": {
+    "node": ">=24.19.0"
+  },
+  "packageManager": "npm@11.20.0",
+  "scripts": {
+    "test": "node scripts/prepare.mjs && node --test tests/*.test.mjs",
+    "check": "npm test && npm run format:check && node scripts/check-repo.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "apply": "node scripts/apply.mjs",
+    "integration": "node scripts/integration.mjs",
+    "hooks:install": "git config core.hooksPath .githooks",
+    "package": "node scripts/package.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "pnpm": "12.18.0",
+    "prettier": "3.10.1"
+  }
+}
