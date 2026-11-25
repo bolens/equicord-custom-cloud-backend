@@ -1,0 +1,25 @@
+{
+  "repository": "https://github.com/Equicord/Equicord.git",
+  "revision": "8d63e9694b2ef5195806b3f8b2e03135a4b4ea2c",
+  "version": "1.15.18.2",
+  "pnpm": "12.18.0",
+  "files": {
+    "src/api/SettingsSync/cloudSetup.tsx": {
+      "original_sha256": "d7d0cd1692578c873052422052140ea95282baf8e6298f157147ffbab31e9003",
+      "patched_sha256": "3c09323b50772bdebd809a50e36ddd8c0e8146ad8fde39f8d5dbeb8a7b3c4c17"
+    },
+    "src/components/settings/tabs/sync/CloudTab.tsx": {
+      "original_sha256": "9b4d33519e1f223fd51006d5b690fde48b41d50c4f15ab769e0567a949b5dd8a",
+      "patched_sha256": "81bf8a00eeb9c578acd2e66becf9e103fe8d0462b356db9cc42e85e77a1d168b"
+    },
+    "src/utils/constants.ts": {
+      "original_sha256": "779b64a5a608c70185dacb904af22b23172c664e605b63107839f8e0a72b7845",
+      "patched_sha256": "417e012fb0ff2ade15bbf010c2f6c94b7fac6f819ab95ef80de41a6dccf3bc8f"
+    },
+    "src/main/csp/index.ts": {
+      "original_sha256": "0db7caac6697cf2b5654053faa2cdb0091eb296a7e2508257567fe21cc644dbd",
+      "patched_sha256": "0db7caac6697cf2b5654053faa2cdb0091eb296a7e2508257567fe21cc644dbd"
+    }
+  },
+  "patch_sha256": "fa04938f2fd5f1af874c63184d42a7e88361644e6b4937ab8c46486021896a8a"
+}

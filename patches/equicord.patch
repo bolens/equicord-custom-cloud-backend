@@ -1,0 +1,77 @@
+diff --git a/src/api/SettingsSync/cloudSetup.tsx b/src/api/SettingsSync/cloudSetup.tsx
+index d3ed6de..ae46b38 100644
+--- a/src/api/SettingsSync/cloudSetup.tsx
++++ b/src/api/SettingsSync/cloudSetup.tsx
+@@ -8,6 +8,7 @@ import * as DataStore from "@api/DataStore";
+ import { showNotification } from "@api/Notifications";
+ import { Settings } from "@api/Settings";
+ import { Logger } from "@utils/Logger";
++import { promptToRestart } from "@utils/promptToRestart";
+ import { OAuth2AuthorizeModal, openModal, UserStore } from "@webpack/common";
+ 
+ export const logger = new Logger("SettingsSync:CloudSetup", "#39b7e0");
+@@ -60,6 +61,26 @@ export async function deauthorizeCloud() {
+ }
+ 
+ export async function authorizeCloud() {
++    if (!IS_WEB) {
++        const origin = getCloudUrlOrigin();
++        const directives = ["connect-src"];
++        if (!await VencordNative.csp.isDomainAllowed(origin, directives)) {
++            Settings.cloud.authenticated = false;
++            const result = await VencordNative.csp.requestAddOverride(origin, directives, "Settings");
++            if (result === "ok") {
++                promptToRestart("relaunch", {
++                    subtitle: "Restart Discord to allow connections to your cloud backend, then enable Cloud Integration again."
++                });
++            } else if (result !== "cancelled") {
++                showNotification({
++                    title: "Cloud Integration",
++                    body: "Could not allow connections to this backend. Approve its host permission before authorizing."
++                });
++            }
++            return;
++        }
++    }
++
+     if (await getAuthorization() !== undefined) {
+         Settings.cloud.authenticated = true;
+         return;
+diff --git a/src/components/settings/tabs/sync/CloudTab.tsx b/src/components/settings/tabs/sync/CloudTab.tsx
+index 114bdcf..af19831 100644
+--- a/src/components/settings/tabs/sync/CloudTab.tsx
++++ b/src/components/settings/tabs/sync/CloudTab.tsx
+@@ -58,7 +58,7 @@ function validateUrl(url: string) {
+     }
+ }
+ 
+-const cloudBackendOptions = [
++export const cloudBackendOptions = [
+     { label: "Equicord Cloud", value: "https://cloud.equicord.org/" },
+     { label: "Vencord Cloud", value: "https://api.vencord.dev/" }
+ ];
+@@ -128,7 +128,7 @@ function CloudTab() {
+                     value={cloudBackendOptions.find(o => o.value === cloud.url)?.value}
+                     onChange={v => changeUrl(v)}
+                     closeOnSelect={true}
+-                    renderOptionPrefix={o => o?.value?.includes("equicord") ? <EquicordIcon /> : <VencordIcon />}
++                    renderOptionPrefix={o => o?.value === "https://cloud.equicord.org/" ? <EquicordIcon /> : o?.value === "https://api.vencord.dev/" ? <VencordIcon /> : null}
+                 />
+             </div>
+ 
+diff --git a/src/utils/constants.ts b/src/utils/constants.ts
+index 89ecefb..edf8f3b 100644
+--- a/src/utils/constants.ts
++++ b/src/utils/constants.ts
+@@ -68,6 +68,11 @@ export interface Dev {
+  * If you are fine with attribution but don't want the badge, add badge: false
+  */
+ export const Devs = /* #__PURE__*/ Object.freeze({
++    Bolens: {
++        name: "bolens",
++        id: 0n,
++        badge: false
++    },
+     Ven: {
+         name: "V",
+         id: 343383572805058560n

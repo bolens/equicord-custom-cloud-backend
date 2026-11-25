@@ -1,0 +1,12 @@
+node_modules/
+.cache/
+dist/
+*.log
+.env
+*.asar
+.DS_Store
+/.env.*
+*.env
+/settings/
+native-settings.json
+settings.json

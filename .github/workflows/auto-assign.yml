@@ -1,0 +1,15 @@
+name: Assign maintainer
+on:
+  issues:
+    types: [opened, reopened, transferred]
+  # Metadata only; the pinned workflow never executes PR code.
+  pull_request_target: # zizmor: ignore[dangerous-triggers]
+    types: [opened, reopened]
+  workflow_dispatch:
+permissions: {}
+jobs:
+  assign:
+    permissions:
+      issues: write
+      pull-requests: write
+    uses: bolens/.github/.github/workflows/reusable-auto-assign.yml@cbe2f2d4e393819c9041853aee2b055807fec90d

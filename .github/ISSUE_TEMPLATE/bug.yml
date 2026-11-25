@@ -1,0 +1,14 @@
+name: Bug report
+description: Report a plugin or source integration failure.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and reproduction
+      description: Include Equicord revision, operating system and expected behavior. Redact your backend URL and credentials.
+    validations:
+      required: true
+  - type: textarea
+    id: checks
+    attributes:
+      label: Validation and redacted diagnostics
